@@ -1,0 +1,22 @@
+<h1 class="mb-4">{{isNewUser ? 'Signup' : 'Login'}}</h1>
+<p class="mb-4 text-danger">{{ errorMsg }}</p>
+<form #authenticationForm="ngForm" (ngSubmit)="saveFormData(authenticationForm)">
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" email required #email="ngModel" ngModel
+      name="email" class="form-control" id="email" aria-describedby="emailHelp">
+      <small *ngIf="email.touched && email.invalid" class="d-inline-block text-danger">Email is not valid</small>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" minlength="8" required #password="ngModel" ngModel class="form-control" id="password" name="password">
+      <small *ngIf="password.touched && password.invalid" class="d-inline-block text-danger">Password must be atleast 8 characters long</small>
+    </div>
+    <button type="submit" class="btn btn-primary mr-2" [disabled]="!authenticationForm.valid">Submit</button>
+    <a style="cursor: pointer;" (click)="switchMode()" *ngIf="isNewUser">
+      Already signed up? Login here!
+    </a>
+    <a style="cursor: pointer;" (click)="switchMode()" *ngIf="!isNewUser">
+      New user? Signup here!
+    </a>
+</form>
